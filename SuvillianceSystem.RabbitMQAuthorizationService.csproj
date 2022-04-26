@@ -4,6 +4,10 @@
     <ProjectReference Include="..\SuvillianceSystem.RabbitMQ_Models\SuvillianceSystem.RabbitMQ_Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
