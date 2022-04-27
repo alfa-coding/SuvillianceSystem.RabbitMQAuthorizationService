@@ -9,12 +9,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Linq;
 using System.Security.Principal;
+using SuvillianceSystem.RabbitMQAuthorizationService.Infrastructure;
 
 namespace SuvillianceSystem.RabbitMQAuthorizationService
 {
-    public class Manager
+    public class Manager:IManager
     {
-        public Dictionary<OperationType, Func<AuthDTO, AuthDTO>> Factory { get; private set; }
+        public Dictionary<OperationType, Func<AuthDTO, AuthDTO>> Factory { get; set; }
         public IAuthManagerInfo Configuration { get; }
 
         public Manager(IAuthManagerInfo configuration)

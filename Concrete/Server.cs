@@ -12,21 +12,23 @@ using System.Security.Claims;
 using System.Linq;
 using System.Security.Principal;
 using SuvillianceSystem.RabbitMQ_Models.Concrete;
+using SuvillianceSystem.RabbitMQAuthorizationService.Infrastructure;
 
 namespace SuvillianceSystem.RabbitMQAuthorizationService
 {
     public class ServerMQ
     {
-        public Manager ManagerClass { get; set; }
-        public ConnectionFactory ConnFactory { get; private set; }
+        private IManager ManagerClass { get; set; }
+        private ConnectionFactory ConnFactory { get; set; }
+        
 
-        public ServerMQ()
+        public ServerMQ(IManager _manager)
         {
             this.ConnFactory = new ConnectionFactory() { HostName = "localhost" };
-
+            ManagerClass = _manager;
         }
 
-        public void Listen()
+        public void ListenLoop()
         {
             using (var connection = this.ConnFactory.CreateConnection())
             using (var channel = connection.CreateModel())
