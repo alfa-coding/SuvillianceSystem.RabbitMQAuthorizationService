@@ -13,7 +13,7 @@ using SuvillianceSystem.RabbitMQAuthorizationService.Infrastructure;
 
 namespace SuvillianceSystem.RabbitMQAuthorizationService
 {
-    public class Manager:IManager
+    public class Manager : IManager
     {
         public Dictionary<OperationType, Func<AuthDTO, AuthDTO>> Factory { get; set; }
         public IAuthManagerInfo Configuration { get; }
@@ -39,8 +39,8 @@ namespace SuvillianceSystem.RabbitMQAuthorizationService
         }
         private AuthDTO Validate(AuthDTO authInfo)
         {
-            OperationStatus status = ValidateTokenHelper(authInfo.Token.Token)?
-                                    OperationStatus.Authorized:OperationStatus.Unauthorized;
+            OperationStatus status = ValidateTokenHelper(authInfo.Token.Token) ?
+                                    OperationStatus.Authorized : OperationStatus.Unauthorized;
             AuthDTO response = new AuthDTO()
             {
                 Operation = authInfo.Operation,
@@ -75,9 +75,18 @@ namespace SuvillianceSystem.RabbitMQAuthorizationService
             var tokenHandler = new JwtSecurityTokenHandler();
             var validationParameters = GetValidationParameters();
 
-            SecurityToken validatedToken;
-            IPrincipal principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
-            return true;
+            SecurityToken validatedToken=null;
+            try
+            {
+                IPrincipal principal = tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+
+            }
+            catch (System.Exception)
+            {
+
+                System.Console.WriteLine("invalid token ");
+            }
+            return validatedToken!=null;
         }
 
         private TokenValidationParameters GetValidationParameters()
