@@ -24,17 +24,22 @@ namespace SuvillianceSystem.RabbitMQAuthorizationService
         private static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
         {
             string secret = Environment.GetEnvironmentVariable("Secret");
+            secret = String.IsNullOrEmpty(secret)?"DevelopmentSecret":secret;
+
             string audience = Environment.GetEnvironmentVariable("Audience");
+            audience = String.IsNullOrEmpty(audience)?"DevelopmentSecret":audience;
+            
             string issuer = Environment.GetEnvironmentVariable("Issuer");
+            issuer = String.IsNullOrEmpty(issuer)?"DevelopmentSecret":issuer;
 
             System.Console.WriteLine($"{secret}, {audience}, {issuer}");
 
             services.AddSingleton<IAuthManagerInfo, AuthManagerInfo>(s =>
                                                             new AuthManagerInfo()
                                                             {
-                                                                Secret = secret!=null?secret:"DevelopmentSecret",
-                                                                Audience = audience!=null?audience:"DevelopmentSecret",
-                                                                Issuer = issuer!=null?issuer:"DevelopmentSecret"
+                                                                Secret = secret,
+                                                                Audience = audience,
+                                                                Issuer = issuer
                                                             }
                                                         );
             services.AddSingleton<IManager, Manager>();
