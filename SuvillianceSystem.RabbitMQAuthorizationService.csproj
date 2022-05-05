@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <Reference Include="SuvillianceSystem.RabbitMQ_Models"> 
-      <HintPath>./ExternalDLLs/SuvillianceSystem.RabbitMQ_Models.dll</HintPath>
+      <HintPath>../ExternalDLLs/SuvillianceSystem.RabbitMQ_Models.dll</HintPath>
     </Reference>
   </ItemGroup>
 
