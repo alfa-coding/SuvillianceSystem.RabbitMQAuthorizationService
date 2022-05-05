@@ -20,11 +20,13 @@ namespace SuvillianceSystem.RabbitMQAuthorizationService
     {
         private IManager ManagerClass { get; set; }
         private ConnectionFactory ConnFactory { get; set; }
+        private IConnectorInfo Connector {get;set;}
         
 
-        public ServerMQ(IManager _manager)
+        public ServerMQ(IManager _manager, IConnectorFactoryInfo conectorInfo)
         {
-            this.ConnFactory = new ConnectionFactory() { HostName = "localhost" };
+            this.Connector=conectorInfo
+            this.ConnFactory = new ConnectionFactory() { HostName = this.Connector.Host };
             ManagerClass = _manager;
         }
 

@@ -1,7 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\SuvillianceSystem.RabbitMQ_Models\SuvillianceSystem.RabbitMQ_Models.csproj" />
+    <Reference Include="SuvillianceSystem.RabbitMQ_Models"> 
+      <HintPath>./ExternalDLLs/SuvillianceSystem.RabbitMQ_Models.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

@@ -42,6 +42,19 @@ namespace SuvillianceSystem.RabbitMQAuthorizationService
                                                                 Issuer = issuer
                                                             }
                                                         );
+            
+            
+            string queueHost = Environment.GetEnvironmentVariable("QueueHost");
+            queueHost = String.IsNullOrEmpty(queueHost)?"localhost":queueHost;
+
+            System.Console.WriteLine($"{queueHost}");
+
+            services.AddSingleton<IConnectorFactoryInfo, ConnectorInfo>(s =>
+                                                            new ConnectorInfo()
+                                                            {
+                                                                Host=queueHost
+                                                            }
+                                                        );
             services.AddSingleton<IManager, Manager>();
 
         }
